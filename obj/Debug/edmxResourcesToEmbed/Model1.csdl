@@ -1,0 +1,393 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DataBasePharmacyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="buy_report">
+    <Key>
+      <PropertyRef Name="buy_report_id" />
+    </Key>
+    <Property Name="buy_id" Type="Int32" Nullable="false" />
+    <Property Name="medicine_id" Type="Int32" Nullable="false" />
+    <Property Name="count" Type="Int32" Nullable="false" />
+    <Property Name="unit_price" Type="Double" Nullable="false" />
+    <Property Name="buy_report_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="medicine" Relationship="Self.FK_buy_repor_medicines" FromRole="buy_report" ToRole="medicines" />
+    <NavigationProperty Name="Buy" Relationship="Self.FK_buy_report_Buys" FromRole="buy_report" ToRole="Buys" />
+  </EntityType>
+  <EntityType Name="Buy">
+    <Key>
+      <PropertyRef Name="buy_id" />
+    </Key>
+    <Property Name="buy_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="employee_id" Type="Int32" Nullable="false" />
+    <Property Name="supplier_id" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="state" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="buy_report" Relationship="Self.FK_buy_report_Buys" FromRole="Buys" ToRole="buy_report" />
+    <NavigationProperty Name="employee" Relationship="Self.FK_Buys_employees" FromRole="Buys" ToRole="employees" />
+    <NavigationProperty Name="supplier" Relationship="Self.FK_Buys_suppliers" FromRole="Buys" ToRole="suppliers" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="category_id" />
+    </Key>
+    <Property Name="category_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="medicines" Relationship="Self.FK_medicines_categories" FromRole="categories" ToRole="medicines" />
+  </EntityType>
+  <EntityType Name="company">
+    <Key>
+      <PropertyRef Name="company_id" />
+    </Key>
+    <Property Name="company_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="medicines" Relationship="Self.FK_medicines_companies" FromRole="companies" ToRole="medicines" />
+  </EntityType>
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="customer_id" />
+    </Key>
+    <Property Name="customer_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <Property Name="adress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="sales" Relationship="Self.FK_sales_customers" FromRole="customers" ToRole="sales" />
+  </EntityType>
+  <EntityType Name="employee">
+    <Key>
+      <PropertyRef Name="employee_id" />
+    </Key>
+    <Property Name="employee_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="adress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="salary" Type="Int32" Nullable="false" />
+    <Property Name="hire_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="type" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Buys" Relationship="Self.FK_Buys_employees" FromRole="employees" ToRole="Buys" />
+    <NavigationProperty Name="sales" Relationship="Self.FK_sales_employees" FromRole="employees" ToRole="sales" />
+  </EntityType>
+  <EntityType Name="medicine">
+    <Key>
+      <PropertyRef Name="medicine_id" />
+    </Key>
+    <Property Name="medicine_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="generic_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="unit_price" Type="Int32" />
+    <Property Name="selling_price" Type="Int32" />
+    <Property Name="start_date" Type="DateTime" Precision="3" />
+    <Property Name="end_date" Type="DateTime" Precision="3" />
+    <Property Name="category_id" Type="Int32" />
+    <Property Name="type_id" Type="Int32" />
+    <Property Name="barcode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="count" Type="Int32" />
+    <Property Name="company_id" Type="Int32" />
+    <NavigationProperty Name="buy_report" Relationship="Self.FK_buy_repor_medicines" FromRole="medicines" ToRole="buy_report" />
+    <NavigationProperty Name="category" Relationship="Self.FK_medicines_categories" FromRole="medicines" ToRole="categories" />
+    <NavigationProperty Name="company" Relationship="Self.FK_medicines_companies" FromRole="medicines" ToRole="companies" />
+    <NavigationProperty Name="Type" Relationship="Self.FK_medicines_Types" FromRole="medicines" ToRole="Types" />
+    <NavigationProperty Name="prescription_required" Relationship="Self.FK_prescription_requireds_medicines" FromRole="medicines" ToRole="prescription_required" />
+    <NavigationProperty Name="Sale_report" Relationship="Self.FK_Sale_report_medicines" FromRole="medicines" ToRole="Sale_report" />
+  </EntityType>
+  <EntityType Name="prescription_required">
+    <Key>
+      <PropertyRef Name="medicine_id" />
+      <PropertyRef Name="type" />
+    </Key>
+    <Property Name="medicine_id" Type="Int32" Nullable="false" />
+    <Property Name="type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="medicine" Relationship="Self.FK_prescription_requireds_medicines" FromRole="prescription_required" ToRole="medicines" />
+  </EntityType>
+  <EntityType Name="Sale_report">
+    <Key>
+      <PropertyRef Name="sale_report_id" />
+    </Key>
+    <Property Name="sale_id" Type="Int32" Nullable="false" />
+    <Property Name="medicine_id" Type="Int32" Nullable="false" />
+    <Property Name="count" Type="Int32" Nullable="false" />
+    <Property Name="sale_unit_price" Type="Double" Nullable="false" />
+    <Property Name="sale_report_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="medicine" Relationship="Self.FK_Sale_report_medicines" FromRole="Sale_report" ToRole="medicines" />
+    <NavigationProperty Name="sale" Relationship="Self.FK_Sale_report_sales" FromRole="Sale_report" ToRole="sales" />
+  </EntityType>
+  <EntityType Name="sale">
+    <Key>
+      <PropertyRef Name="sale_id" />
+    </Key>
+    <Property Name="sale_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="employee_id" Type="Int32" Nullable="false" />
+    <Property Name="customer_id" Type="Int32" Nullable="false" />
+    <Property Name="date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="state" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <NavigationProperty Name="customer" Relationship="Self.FK_sales_customers" FromRole="sales" ToRole="customers" />
+    <NavigationProperty Name="employee" Relationship="Self.FK_sales_employees" FromRole="sales" ToRole="employees" />
+    <NavigationProperty Name="Sale_report" Relationship="Self.FK_Sale_report_sales" FromRole="sales" ToRole="Sale_report" />
+  </EntityType>
+  <EntityType Name="supplier">
+    <Key>
+      <PropertyRef Name="supplier_id" />
+    </Key>
+    <Property Name="supplier_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="fax" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="logo" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="email" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Buys" Relationship="Self.FK_Buys_suppliers" FromRole="suppliers" ToRole="Buys" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="type_id" />
+    </Key>
+    <Property Name="type_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="medicines" Relationship="Self.FK_medicines_Types" FromRole="Types" ToRole="medicines" />
+  </EntityType>
+  <Association Name="FK_buy_repor_medicines">
+    <End Role="medicines" Type="Self.medicine" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="buy_report" Type="Self.buy_report" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="medicines">
+        <PropertyRef Name="medicine_id" />
+      </Principal>
+      <Dependent Role="buy_report">
+        <PropertyRef Name="medicine_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_buy_report_Buys">
+    <End Role="Buys" Type="Self.Buy" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="buy_report" Type="Self.buy_report" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Buys">
+        <PropertyRef Name="buy_id" />
+      </Principal>
+      <Dependent Role="buy_report">
+        <PropertyRef Name="buy_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Buys_employees">
+    <End Role="employees" Type="Self.employee" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Buys" Type="Self.Buy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employees">
+        <PropertyRef Name="employee_id" />
+      </Principal>
+      <Dependent Role="Buys">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Buys_suppliers">
+    <End Role="suppliers" Type="Self.supplier" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Buys" Type="Self.Buy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="suppliers">
+        <PropertyRef Name="supplier_id" />
+      </Principal>
+      <Dependent Role="Buys">
+        <PropertyRef Name="supplier_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_medicines_categories">
+    <End Role="categories" Type="Self.category" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="medicines" Type="Self.medicine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="categories">
+        <PropertyRef Name="category_id" />
+      </Principal>
+      <Dependent Role="medicines">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_medicines_companies">
+    <End Role="companies" Type="Self.company" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="medicines" Type="Self.medicine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="companies">
+        <PropertyRef Name="company_id" />
+      </Principal>
+      <Dependent Role="medicines">
+        <PropertyRef Name="company_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sales_customers">
+    <End Role="customers" Type="Self.customer" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="sales" Type="Self.sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customers">
+        <PropertyRef Name="customer_id" />
+      </Principal>
+      <Dependent Role="sales">
+        <PropertyRef Name="customer_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_sales_employees">
+    <End Role="employees" Type="Self.employee" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="sales" Type="Self.sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employees">
+        <PropertyRef Name="employee_id" />
+      </Principal>
+      <Dependent Role="sales">
+        <PropertyRef Name="employee_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_medicines_Types">
+    <End Role="Types" Type="Self.Type" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="medicines" Type="Self.medicine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Types">
+        <PropertyRef Name="type_id" />
+      </Principal>
+      <Dependent Role="medicines">
+        <PropertyRef Name="type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_prescription_requireds_medicines">
+    <End Role="medicines" Type="Self.medicine" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="prescription_required" Type="Self.prescription_required" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="medicines">
+        <PropertyRef Name="medicine_id" />
+      </Principal>
+      <Dependent Role="prescription_required">
+        <PropertyRef Name="medicine_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sale_report_medicines">
+    <End Role="medicines" Type="Self.medicine" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Sale_report" Type="Self.Sale_report" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="medicines">
+        <PropertyRef Name="medicine_id" />
+      </Principal>
+      <Dependent Role="Sale_report">
+        <PropertyRef Name="medicine_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sale_report_sales">
+    <End Role="sales" Type="Self.sale" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Sale_report" Type="Self.Sale_report" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="sales">
+        <PropertyRef Name="sale_id" />
+      </Principal>
+      <Dependent Role="Sale_report">
+        <PropertyRef Name="sale_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DataBaseConnection" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="buy_report" EntityType="Self.buy_report" />
+    <EntitySet Name="Buys" EntityType="Self.Buy" />
+    <EntitySet Name="categories" EntityType="Self.category" />
+    <EntitySet Name="companies" EntityType="Self.company" />
+    <EntitySet Name="customers" EntityType="Self.customer" />
+    <EntitySet Name="employees" EntityType="Self.employee" />
+    <EntitySet Name="medicines" EntityType="Self.medicine" />
+    <EntitySet Name="prescription_required" EntityType="Self.prescription_required" />
+    <EntitySet Name="Sale_report" EntityType="Self.Sale_report" />
+    <EntitySet Name="sales" EntityType="Self.sale" />
+    <EntitySet Name="suppliers" EntityType="Self.supplier" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Types" EntityType="Self.Type" />
+    <AssociationSet Name="FK_buy_repor_medicines" Association="Self.FK_buy_repor_medicines">
+      <End Role="medicines" EntitySet="medicines" />
+      <End Role="buy_report" EntitySet="buy_report" />
+    </AssociationSet>
+    <AssociationSet Name="FK_buy_report_Buys" Association="Self.FK_buy_report_Buys">
+      <End Role="Buys" EntitySet="Buys" />
+      <End Role="buy_report" EntitySet="buy_report" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Buys_employees" Association="Self.FK_Buys_employees">
+      <End Role="employees" EntitySet="employees" />
+      <End Role="Buys" EntitySet="Buys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Buys_suppliers" Association="Self.FK_Buys_suppliers">
+      <End Role="suppliers" EntitySet="suppliers" />
+      <End Role="Buys" EntitySet="Buys" />
+    </AssociationSet>
+    <AssociationSet Name="FK_medicines_categories" Association="Self.FK_medicines_categories">
+      <End Role="categories" EntitySet="categories" />
+      <End Role="medicines" EntitySet="medicines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_medicines_companies" Association="Self.FK_medicines_companies">
+      <End Role="companies" EntitySet="companies" />
+      <End Role="medicines" EntitySet="medicines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sales_customers" Association="Self.FK_sales_customers">
+      <End Role="customers" EntitySet="customers" />
+      <End Role="sales" EntitySet="sales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_sales_employees" Association="Self.FK_sales_employees">
+      <End Role="employees" EntitySet="employees" />
+      <End Role="sales" EntitySet="sales" />
+    </AssociationSet>
+    <AssociationSet Name="FK_medicines_Types" Association="Self.FK_medicines_Types">
+      <End Role="Types" EntitySet="Types" />
+      <End Role="medicines" EntitySet="medicines" />
+    </AssociationSet>
+    <AssociationSet Name="FK_prescription_requireds_medicines" Association="Self.FK_prescription_requireds_medicines">
+      <End Role="medicines" EntitySet="medicines" />
+      <End Role="prescription_required" EntitySet="prescription_required" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sale_report_medicines" Association="Self.FK_Sale_report_medicines">
+      <End Role="medicines" EntitySet="medicines" />
+      <End Role="Sale_report" EntitySet="Sale_report" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sale_report_sales" Association="Self.FK_Sale_report_sales">
+      <End Role="sales" EntitySet="sales" />
+      <End Role="Sale_report" EntitySet="Sale_report" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

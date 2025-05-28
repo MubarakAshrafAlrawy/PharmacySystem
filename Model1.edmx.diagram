@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4cf5bc888b4b451c8b02133702f81d7e" Name="Diagram1">
+        <EntityTypeShape EntityType="DataBasePharmacyModel.buy_report" Width="1.5" PointX="5.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBasePharmacyModel.Buy" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBasePharmacyModel.category" Width="1.5" PointX="0.75" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBasePharmacyModel.company" Width="1.5" PointX="0.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBasePharmacyModel.customer" Width="1.5" PointX="3.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBasePharmacyModel.employee" Width="1.5" PointX="0.75" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBasePharmacyModel.medicine" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBasePharmacyModel.prescription_required" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBasePharmacyModel.Sale_report" Width="1.5" PointX="8.25" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBasePharmacyModel.sale" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBasePharmacyModel.supplier" Width="1.5" PointX="0.75" PointY="17" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBasePharmacyModel.sysdiagram" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataBasePharmacyModel.Type" Width="1.5" PointX="0.75" PointY="9.625" IsExpanded="true" />
+        <AssociationConnector Association="DataBasePharmacyModel.FK_buy_repor_medicines" ManuallyRouted="false" />
+        <AssociationConnector Association="DataBasePharmacyModel.FK_buy_report_Buys" ManuallyRouted="false" />
+        <AssociationConnector Association="DataBasePharmacyModel.FK_Buys_employees" ManuallyRouted="false" />
+        <AssociationConnector Association="DataBasePharmacyModel.FK_Buys_suppliers" ManuallyRouted="false" />
+        <AssociationConnector Association="DataBasePharmacyModel.FK_medicines_categories" ManuallyRouted="false" />
+        <AssociationConnector Association="DataBasePharmacyModel.FK_medicines_companies" ManuallyRouted="false" />
+        <AssociationConnector Association="DataBasePharmacyModel.FK_sales_customers" ManuallyRouted="false" />
+        <AssociationConnector Association="DataBasePharmacyModel.FK_sales_employees" ManuallyRouted="false" />
+        <AssociationConnector Association="DataBasePharmacyModel.FK_medicines_Types" ManuallyRouted="false" />
+        <AssociationConnector Association="DataBasePharmacyModel.FK_prescription_requireds_medicines" ManuallyRouted="false" />
+        <AssociationConnector Association="DataBasePharmacyModel.FK_Sale_report_medicines" ManuallyRouted="false" />
+        <AssociationConnector Association="DataBasePharmacyModel.FK_Sale_report_sales" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
