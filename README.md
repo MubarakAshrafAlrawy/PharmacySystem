@@ -1,2 +1,6 @@
-# PharmacySystem
-this repository is for the c#project named pharmacy system
+# Project Team
+- Mubarak Ashraf Sharaf
+- Ismaeel Said Alsharehy
+- Mohammed Ali Mahyoob
+- Mohammed Nabeel
+- Mohammed Redwan Hassan
